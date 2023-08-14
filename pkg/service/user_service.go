@@ -36,7 +36,7 @@ func (s *userService) ChangePicture(ctx context.Context, username, filename stri
 	old_url := user.Picture_url
 	user.Picture_url = filename
 
-	_, err = s.repository.Update(user)
+	_, err = s.repository.Update(ctx, user)
 	if err != nil {
 		return false, err
 	}
@@ -56,7 +56,7 @@ func (s *userService) ChangeNickname(ctx context.Context, username, nickname str
 
 	user.Nickname = nickname
 
-	_, err = s.repository.Update(user)
+	_, err = s.repository.Update(ctx, user)
 	if err != nil {
 		return false, err
 	}

@@ -102,7 +102,7 @@ func (h *handler) editNickname(c *gin.Context) {
 	}
 
 	var req struct {
-		Nickname string `form:"nickname" binding:"required"`
+		Nickname string `form:"nickname"`
 	}
 
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -110,10 +110,10 @@ func (h *handler) editNickname(c *gin.Context) {
 		return
 	}
 
-	if govalidator.IsNull(req.Nickname) {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Nickname can not empty"})
-		return
-	}
+	// if govalidator.IsNull(req.Nickname) {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "Nickname can not empty"})
+	// 	return
+	// }
 
 	b, err := h.UserService.ChangeNickname(c.Request.Context(), username, req.Nickname)
 	if err != nil {
